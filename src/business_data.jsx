@@ -14,10 +14,28 @@ export default function BusinessDataTool() {
             });
 
             const data = await res.json();
-            toast.success(data.message || "Data sent successfully");
+            toast.success(data.message || "Data sent successfully", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         } catch (err) {
             console.error(err);
-            toast.error("Failed to send data");
+            toast.error("Failed to send data", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     };
 
@@ -85,7 +103,16 @@ export default function BusinessDataTool() {
 
         Object.entries(dataUrls).forEach(([source, url]) => {
             if (!url) {
-                toast.warning(`File for ${source} not ready yet.`);
+                toast.warning(`File for ${source} not ready yet.`, {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
                 return;
             }
 
@@ -99,7 +126,16 @@ export default function BusinessDataTool() {
         });
 
         if (downloaded) {
-            toast.success("All available files downloaded");
+            toast.success("All available files downloaded", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
         }
     };
 
