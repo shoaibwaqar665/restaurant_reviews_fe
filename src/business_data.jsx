@@ -6,6 +6,19 @@ export default function BusinessDataTool() {
     const [businessName, setBusinessName] = useState("");
 
     const handleSend = async () => {
+        if (!businessName.trim()) {
+            toast.warn("Please enter a business name", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            });
+            return;
+        }
+
         try {
             const res = await fetch("http://144.24.99.59:8000/google/restaurant_details", {
                 method: "POST",
@@ -21,7 +34,6 @@ export default function BusinessDataTool() {
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                progress: undefined,
                 theme: "light",
             });
         } catch (err) {
@@ -33,11 +45,11 @@ export default function BusinessDataTool() {
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                progress: undefined,
                 theme: "light",
             });
         }
     };
+
 
     const [dataUrls, setDataUrls] = useState({
         google: null,
