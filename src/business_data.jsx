@@ -128,13 +128,43 @@ export default function BusinessDataTool() {
                 return;
             }
 
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = `business_data_${source}.json`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            downloaded = true;
+            // Fetch the JSON data with proper encoding
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    // Create a Blob with proper encoding
+                    const blob = new Blob([JSON.stringify(data, null, 2)], {
+                        type: 'application/json;charset=utf-8'
+                    });
+
+                    // Create download link
+                    const link = document.createElement("a");
+                    link.href = URL.createObjectURL(blob);
+                    link.download = `business_data_${source}.json`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Revoke the object URL to free memory
+                    setTimeout(() => URL.revokeObjectURL(link.href), 100);
+                    downloaded = true;
+                })
+                .catch(error => {
+                    console.error('Error downloading file:', error);
+                    toast.error(`Failed to download ${source} data`, {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                    });
+                });
         });
 
         if (downloaded) {
@@ -150,7 +180,6 @@ export default function BusinessDataTool() {
             });
         }
     };
-
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
             <div className="bg-white p-6 rounded-2xl shadow-md w-full max-w-md">
