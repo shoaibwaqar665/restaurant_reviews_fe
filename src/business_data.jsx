@@ -20,7 +20,7 @@ export default function BusinessDataTool() {
         }
 
         try {
-            const res = await fetch("http://144.24.99.59:8000/google/restaurant_details", {
+            const res = await fetch("/api/google/restaurant_details", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ query: businessName }),
@@ -65,7 +65,7 @@ export default function BusinessDataTool() {
 
             for (const source of sources) {
                 try {
-                    const res = await fetch(`http://144.24.99.59:8000/${source}/restaurant_details?format=json`);
+                    const res = await fetch(`/api/${source}/restaurant_details?format=json`);
                     const blob = await res.blob();
                     const url = window.URL.createObjectURL(blob);
                     updatedUrls[source] = url;
