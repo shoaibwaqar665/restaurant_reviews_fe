@@ -10,7 +10,7 @@ export default function BusinessDataTool() {
             toast.warn("Please enter a business name", {
                 position: "top-right",
                 autoClose: 3000,
-                hideProgressBar: true,
+                hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
@@ -30,7 +30,7 @@ export default function BusinessDataTool() {
             toast.success(data.message || "Data sent successfully", {
                 position: "top-right",
                 autoClose: 5000,
-                hideProgressBar: true,
+                hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
@@ -41,7 +41,7 @@ export default function BusinessDataTool() {
             toast.error("Failed to send data", {
                 position: "top-right",
                 autoClose: 5000,
-                hideProgressBar: true,
+                hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
@@ -74,7 +74,7 @@ export default function BusinessDataTool() {
                     toast.error(`Failed to prepare the file for ${source}`, {
                         position: "top-right",
                         autoClose: 5000,
-                        hideProgressBar: true,
+                        hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,
@@ -90,7 +90,7 @@ export default function BusinessDataTool() {
                 toast.success("All data is ready to download", {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: true,
+                    hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
@@ -118,7 +118,7 @@ export default function BusinessDataTool() {
                 toast.warning(`File for ${source} not ready yet.`, {
                     position: "top-right",
                     autoClose: 5000,
-                    hideProgressBar: true,
+                    hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
@@ -141,7 +141,7 @@ export default function BusinessDataTool() {
             toast.success("All available files downloaded", {
                 position: "top-right",
                 autoClose: 5000,
-                hideProgressBar: true,
+                hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
