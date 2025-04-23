@@ -20,14 +20,25 @@ export default function BusinessDataTool() {
         }
 
         try {
-            const res = await fetch("/api/google/restaurant_details", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query: businessName }),
-            });
+            const requestBody = JSON.stringify({ query: businessName });
 
-            const data = await res.json();
-            toast.success(data.message || "Data sent successfully", {
+            const [googleRes, yelpRes] = await Promise.all([
+                fetch("/api/google/restaurant_details", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: requestBody,
+                }),
+                fetch("/api/yelp/restaurant_details", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: requestBody,
+                }),
+            ]);
+
+            const googleData = await googleRes.json();
+            const yelpData = await yelpRes.json();
+
+            toast.success(googleData.message || "Google data sent successfully", {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -36,6 +47,17 @@ export default function BusinessDataTool() {
                 draggable: true,
                 theme: "light",
             });
+
+            toast.success(yelpData.message || "Yelp data sent successfully", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            });
+
         } catch (err) {
             console.error(err);
             toast.error("Failed to send data", {
@@ -49,6 +71,7 @@ export default function BusinessDataTool() {
             });
         }
     };
+
 
 
     const [dataUrls, setDataUrls] = useState({
