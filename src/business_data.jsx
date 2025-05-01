@@ -23,16 +23,16 @@ export default function BusinessDataTool() {
             const requestBody = JSON.stringify({ query: businessName });
 
             const [googleRes, yelpRes] = await Promise.all([
-                fetch("/api/google/restaurant_details", {
+                fetch("/api/tripadvisor/restaurant_details", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: requestBody,
                 }),
-                fetch("/api/yelp/restaurant_details", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: requestBody,
-                }),
+                // fetch("/api/yelp/restaurant_details", {
+                //     method: "POST",
+                //     headers: { "Content-Type": "application/json" },
+                //     body: requestBody,
+                // }),
             ]);
 
             const googleData = await googleRes.json();
