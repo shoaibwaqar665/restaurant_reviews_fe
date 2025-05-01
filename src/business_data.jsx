@@ -22,33 +22,18 @@ export default function BusinessDataTool() {
         try {
             const requestBody = JSON.stringify({ query: businessName });
 
-            const [googleRes, yelpRes] = await Promise.all([
+            const [tripRes, yelpRes] = await Promise.all([
                 fetch("/api/tripadvisor/restaurant_details", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: requestBody,
                 }),
-                // fetch("/api/yelp/restaurant_details", {
-                //     method: "POST",
-                //     headers: { "Content-Type": "application/json" },
-                //     body: requestBody,
-                // }),
+               
             ]);
 
-            const googleData = await googleRes.json();
-            const yelpData = await yelpRes.json();
+            const tripData = await tripRes.json();
 
-            toast.success(googleData.message || "Google data sent successfully", {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-            });
-
-            toast.success(yelpData.message || "Yelp data sent successfully", {
+            toast.success(tripData.message || "Google data sent successfully", {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
